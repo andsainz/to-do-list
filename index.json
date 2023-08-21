@@ -1,6 +1,11 @@
 {
   "tasks": [
     {
+      "id": 1,
+      "title": "sweep",
+      "description": "the room"
+    },
+    {
       "id": 2,
       "title": "clean",
       "description": "bathroom"
@@ -16,9 +21,29 @@
       "description": "with friends, music, sports"
     },
     {
-      "title": "NEW",
-      "description": "",
+      "title": "wash",
+      "description": "the dishes",
+      "id": 5
+    },
+    {
+      "title": "fregar",
+      "description": "platos",
+      "id": 6
+    },
+    {
+      "title": "poner",
+      "description": "lavadora",
       "id": 7
+    },
+    {
+      "title": "hola",
+      "description": "lalal",
+      "id": 8
+    },
+    {
+      "title": "fdss",
+      "description": "sdsd",
+      "id": 9
     }
   ]
 }
