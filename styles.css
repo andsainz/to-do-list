@@ -1,0 +1,43 @@
+.container{
+    border: 3px solid red;
+    justify-content: center;
+    text-align: center;
+}
+.form--container input{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 10px;
+    border: 0.05rem solid;
+}
+.form--container button {
+    background-color: greenyellow;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    font-size: larger;
+}
+ul{
+    border: 3px solid orange;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+li{
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    width: 10rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    background-color: lightsalmon;
+    box-shadow: 3px 3px 3px grey;
+}
+#taskCheckbox:checked + span {
+    text-decoration: line-through;
+}
+.buttons{
+    width: 1.5rem;
+}

@@ -1,49 +1,24 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "sweep",
-      "description": "the room"
-    },
-    {
-      "id": 2,
       "title": "clean",
-      "description": "bathroom"
+      "description": "the dishes and the bathroom",
+      "id": 6,
+      "completed": true
     },
     {
-      "id": 3,
-      "title": "learn",
-      "description": "js"
-    },
-    {
-      "id": 4,
-      "title": "enjoy",
-      "description": "with friends, music, sports"
-    },
-    {
-      "title": "wash",
-      "description": "the dishes",
-      "id": 5
-    },
-    {
-      "title": "fregar",
-      "description": "platos",
-      "id": 6
-    },
-    {
-      "title": "poner",
-      "description": "lavadora",
+      "title": "study",
+      "description": "ecmo and react",
+      "createdAt": "2/7/2023}",
+      "completed": false,
       "id": 7
     },
     {
-      "title": "hola",
-      "description": "lalal",
+      "title": "spend time with joey",
+      "description": "go to a lake",
+      "createdAt": "2/7/2023}",
+      "completed": false,
       "id": 8
-    },
-    {
-      "title": "fdss",
-      "description": "sdsd",
-      "id": 9
     }
   ]
 }

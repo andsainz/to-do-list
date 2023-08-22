@@ -16,7 +16,14 @@ async function showTasks () {
         const textTitle = document.createElement('p')
         const textDescription = document.createElement('p')
         
-        li.innerHTML = `<h1>${task.title}</h1><br><p>${task.description}<p><img id="editTask--btn" src="images/draw.png" onclick="editTask(${task.id})"><img id="removeTask--btn" src="images/close.png" onclick="removeTask(${task.id})">`
+        li.innerHTML = `
+        <input type="checkbox" id="taskCheckbox">
+        <span>
+        <h3>${task.title}</h3>
+        <p>${task.description}<p>
+        </span>
+        <img class="buttons" id="editTask--btn" src="images/draw.png" onclick="editTask(${task.id})">
+        <img class="buttons" id="removeTask--btn" src="images/close.png" onclick="removeTask(${task.id})">`
         li.appendChild(textTitle);
         li.appendChild(textDescription);
         ul.appendChild(li);
@@ -30,39 +37,38 @@ addBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     const textTitle = inputTitle.value;
     const textDescription = inputDescription.value;
-    const textId = inputId.value;
+    const date = new Date();
+    const textDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}}`
 
-if(textId === '') {
-    console.log(textId)
+if(!inputId.value) {
         if(textTitle !== '' && textDescription !== ''){
             console.log(textTitle, textDescription)
-    const response = await fetch ('http://localhost:3000/tasks', {
-        method: 'POST',
-        headers: {
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            
-            title: textTitle,
-            description: textDescription
-        
-        })
-    });
-}
-else{
-    
-    
+            const response = await fetch ('http://localhost:3000/tasks', {
+                method: 'POST',
+                headers: {
+                "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                
+                title: textTitle,
+                description: textDescription,
+                createdAt: textDate,
+                completed: false
+                })
+            });
+        }
+} else {
+    const textId = inputId.value;
     const response = await fetch (`http://localhost:3000/tasks/${textId}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            title: inputTitle,
-            description: inputDescription
+            title: textTitle,
+            description: textDescription
         })
     })
-}
 }
 
 inputTitle.value = ""; //el input se queda en blanco
@@ -78,8 +84,7 @@ async function editTask(id){
     inputTitle.value = data.title;
     inputDescription.value = data.description;
     inputId.value = data.id;
-
-    }
+}
 
 
 //DELETE TASK, DELETE
@@ -95,3 +100,21 @@ async function removeTask (id){
         }
     })
 }
+
+//MARCAR UNA TAREA COMO COMPLETADA CON CHECKBOX
+/* const taskCheckbox = document.querySelector('#taskCheckbox')
+taskCheckbox.addEventListener("click", async () => {
+    
+    let result = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+    method: 'PUT',
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        completed: true}
+        )
+    })
+
+const updatedTask = await result.json();
+return data;
+    }) */
