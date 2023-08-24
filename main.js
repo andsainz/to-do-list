@@ -2,7 +2,6 @@ const inputTitle = document.querySelector('#title--input')
 const inputDescription = document.querySelector('#description--input')
 const inputId = document.querySelector('#id--input')
 const addBtn = document.querySelector('.btn--add')
-const ul = document.querySelector('ul')
 
 //SHOW TASK, GET
 async function showTasks () {
@@ -17,7 +16,7 @@ async function showTasks () {
         const textDescription = document.createElement('p')
         
         li.innerHTML = `
-        <input type="checkbox" id="taskCheckbox">
+        <input type="checkbox" class="taskCheckbox" data-id="${task.id}" ${task.completed ? 'checked' : ''} onchange="updateCompletedTask(${task.id}, this.checked)">
         <span>
         <h3>${task.title}</h3>
         <p>${task.description}<p>
@@ -37,8 +36,7 @@ addBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     const textTitle = inputTitle.value;
     const textDescription = inputDescription.value;
-    const date = new Date();
-    const textDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}}`
+
 
 if(!inputId.value) {
         if(textTitle !== '' && textDescription !== ''){
@@ -87,7 +85,7 @@ async function editTask(id){
 }
 
 
-//DELETE TASK, DELETE
+//REMOVE TASK, DELETE
 async function removeTask (id){
     let result = await fetch("http://localhost:3000/tasks")
     let data = await result.json()
@@ -102,19 +100,71 @@ async function removeTask (id){
 }
 
 //MARCAR UNA TAREA COMO COMPLETADA CON CHECKBOX
-/* const taskCheckbox = document.querySelector('#taskCheckbox')
-taskCheckbox.addEventListener("click", async () => {
-    
-    let result = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-    method: 'PUT',
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        completed: true}
-        )
+async function updateCompletedTask(id, completed){
+    let result = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    ...task,
+                    completed})
     })
+}
 
-const updatedTask = await result.json();
-return data;
-    }) */
+
+//FILTRAR TAREAS
+async function showFilteredTasks() {
+    const ul = document.querySelector('ul');
+    const select = document.querySelector('#filter');
+    let filterBy = select.value;
+    
+    let tasks = await (await fetch(`http://localhost:3000/tasks`)).json();
+
+
+    if (filterBy === 'pending') {
+        tasks = tasks.filter(task => !task.completed);
+    } else if (filterBy === 'completed') {
+        tasks = tasks.filter(task => task.completed);
+    }
+
+    ul.innerHTML = '';
+
+    // Mostrar las tareas filtradas
+    tasks.forEach(task => {
+        const li = document.createElement('li');
+        const textTitle = document.createElement('p');
+        const textDescription = document.createElement('p');
+        
+        li.innerHTML = `
+            <div class="text--container">
+            <input type="checkbox" class="taskCheckbox" data-id="${task.id}" ${task.completed ? 'checked' : ''} onchange="updateCompletedTask(${task.id}, this.checked)">
+            <span>
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
+            </span>
+            </div>
+            <div class="tools--container">
+            <img class="buttons" id="editTask--btn" src="images/draw.png" onclick="editTask(${task.id})">
+            <img class="buttons" id="removeTask--btn" src="images/close.png" onclick="removeTask(${task.id})">
+            </div>`;
+
+        li.appendChild(textTitle);
+        li.appendChild(textDescription);
+        ul.appendChild(li);
+    });
+}
+
+// Agregar event listener al elemento select
+const select = document.querySelector('#filter');
+select.addEventListener('change', showFilteredTasks);
+
+// Mostrar todas las tareas al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    showFilteredTasks();
+});
+
+
+//FECHA
+/* let today = new Date()
+let now = today.toLocaleString */
