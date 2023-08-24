@@ -1,12 +1,23 @@
+*{
+    font-family: 'Gochi Hand', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+}
+input::placeholder{
+    font-family: 'Handlee', sans-serif;
+}
 body{
     background-image: url('./images/background-img.jpg');
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-color: white;
     background-position: center;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .container{
-    border: 3px solid red;
     justify-content: center;
     text-align: center;
 }
@@ -24,7 +35,6 @@ body{
     font-size: larger;
 }
 ul{
-    border: 3px solid orange;
     flex-direction: row;
     display: flex;
     flex-wrap: wrap;
@@ -33,9 +43,10 @@ ul{
 li{
     text-decoration: none;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     flex-wrap: wrap;
     width: 10rem;
     height: 10rem;
@@ -49,21 +60,23 @@ li div {
     justify-content: center;
     align-items: center;}
 .text--container{
-    border: 3px solid green;
     width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 .tools--container{
-    border: 3px solid blue;
     width: 10rem;
     display: flex;
     align-self: flex-end;
-    
 }
 .taskCheckbox:checked + span {
     text-decoration: line-through;
 }
 .buttons{
     width: 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .filter--container {
@@ -75,4 +88,48 @@ li div {
 }
 select {
     margin-left: 0.5rem;
+}
+
+
+/*media query mobile versión*/
+@media only screen and (max-width: 768px) {
+    body{
+        scroll-behavior: auto;
+        margin-bottom: 2rem;
+    }
+    h1{
+        margin: 3rem;
+        transform: scale(3);
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    ul{
+        margin: 0;
+        padding: 0;
+        margin-top: 1.5rem;
+        display: flex;
+        margin-left: 0;
+    }
+    li{
+        width: 15rem;
+        height: 13rem;
+        justify-content: center;
+        display: flex;
+    }
+    li input {
+        transform: scale(2);
+    }
+    .text--container{
+        width: 15rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .tools--container{
+        width: 15rem;
+    }
 }

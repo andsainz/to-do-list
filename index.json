@@ -1,46 +1,44 @@
 {
   "tasks": [
     {
-      "title": "clean",
-      "description": "dishes and clothes",
-      "createdAt": "3/7/2023}",
-      "completed": true,
-      "id": 9
-    },
-    {
       "title": "finish",
       "description": "this proyect",
-      "createdAt": "4/7/2023}",
-      "completed": false,
+      "createdAt": "2023-08-18T15:30:00Z",
+      "dueDate": "2023-08-23T09:00:00Z",
+      "completed": true,
       "id": 10
-    },
-    {
-      "title": "study",
-      "description": "ecmo and react",
-      "createdAt": "4/7/2023}",
-      "completed": false,
-      "id": 11
     },
     {
       "title": "spend time with joey",
       "description": "go to a lake",
-      "createdAt": "4/7/2023}",
+      "createdAt": "2023-07-15T15:30:00Z",
+      "dueDate": "2023-08-1T09:00:00Z",
       "completed": false,
       "id": 12
     },
     {
-      "title": "sfcdfd",
-      "description": "fdcd",
-      "createdAt": "4/7/2023}",
-      "completed": false,
-      "id": 13
+      "title": "ewjfkjfk",
+      "description": "djkwjfkcds",
+      "completed": true,
+      "createdAt": "2023-08-24T12:46:20.512Z",
+      "dueDate": "2023-08-31T12:46:20.512Z",
+      "id": 16
     },
     {
-      "title": "fdfcdfc",
-      "description": "dd",
-      "createdAt": "4/7/2023}",
+      "title": "clean",
+      "description": "dishes and clothes",
       "completed": false,
-      "id": 14
+      "createdAt": "2023-08-24T13:14:57.770Z",
+      "dueDate": "2023-08-31T13:14:57.770Z",
+      "id": 17
+    },
+    {
+      "title": "VFDBVF",
+      "description": "DVFBGF",
+      "completed": false,
+      "createdAt": "2023-08-24T14:03:29.786Z",
+      "dueDate": "2023-08-31T14:03:29.786Z",
+      "id": 18
     }
   ]
 }

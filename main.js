@@ -2,6 +2,7 @@ const inputTitle = document.querySelector('#title--input')
 const inputDescription = document.querySelector('#description--input')
 const inputId = document.querySelector('#id--input')
 const addBtn = document.querySelector('.btn--add')
+const ul = document.querySelector('ul')
 
 //SHOW TASK, GET
 async function showTasks () {
@@ -41,6 +42,7 @@ addBtn.addEventListener('click', async (e) => {
 if(!inputId.value) {
         if(textTitle !== '' && textDescription !== ''){
             console.log(textTitle, textDescription)
+            const currentDate = new Date()
             const response = await fetch ('http://localhost:3000/tasks', {
                 method: 'POST',
                 headers: {
@@ -50,8 +52,9 @@ if(!inputId.value) {
                 
                 title: textTitle,
                 description: textDescription,
-                createdAt: textDate,
-                completed: false
+                completed: false,
+                createdAt: new Date().toISOString(),
+                dueDate: new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000)
                 })
             });
         }
@@ -102,16 +105,14 @@ async function removeTask (id){
 //MARCAR UNA TAREA COMO COMPLETADA CON CHECKBOX
 async function updateCompletedTask(id, completed){
     let result = await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'PUT',
+        method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    ...task,
                     completed})
     })
 }
-
 
 //FILTRAR TAREAS
 async function showFilteredTasks() {
@@ -126,6 +127,10 @@ async function showFilteredTasks() {
         tasks = tasks.filter(task => !task.completed);
     } else if (filterBy === 'completed') {
         tasks = tasks.filter(task => task.completed);
+    } else if (filterBy === 'creationDate'){
+        tasks = tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+    } else if (filterBy === 'dueDate') {
+        tasks = tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
     }
 
     ul.innerHTML = '';
@@ -163,8 +168,3 @@ select.addEventListener('change', showFilteredTasks);
 document.addEventListener('DOMContentLoaded', () => {
     showFilteredTasks();
 });
-
-
-//FECHA
-/* let today = new Date()
-let now = today.toLocaleString */
