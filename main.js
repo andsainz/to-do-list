@@ -53,15 +53,15 @@ if(!inputId.value) {
                 title: textTitle,
                 description: textDescription,
                 completed: false,
-                createdAt: new Date().toISOString(),
-                dueDate: new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000)
+                createdAt: currentDate.toISOString(), //método fecha, h, min, s, ms
+                dueDate: new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000) //fecha de vencimiento en 1 semana por defecto
                 })
             });
         }
 } else {
     const textId = inputId.value;
     const response = await fetch (`http://localhost:3000/tasks/${textId}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             "Content-Type": "application/json"
         },
@@ -160,11 +160,9 @@ async function showFilteredTasks() {
     });
 }
 
-// Agregar event listener al elemento select
 const select = document.querySelector('#filter');
 select.addEventListener('change', showFilteredTasks);
 
-// Mostrar todas las tareas al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     showFilteredTasks();
 });
